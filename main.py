@@ -14,6 +14,7 @@ chars = [
     '+', ')', '(', '*', '&', '^', '%', '$', '#', '@', '!', '¶', '\r'
 ]
 
+
 # scratch setup
 session = scratch.Session(SESSION_ID, username='SupKittyMeow')
 conn = session.connect_cloud('967781599')
