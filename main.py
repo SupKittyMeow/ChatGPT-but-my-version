@@ -6,14 +6,13 @@ import os
 # constants
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 SESSION_ID = os.getenv('SESSION_ID')
-chars = [
+CHARS = [
     '', '', '', '', '', '', '', '', '', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
     'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '`', '~', '-', '=',
     '.', '/', ';', "'", '[', ']', '\\', '|', '}', '{', '"', ':', '?', '>', '<', '_',
     '+', ')', '(', '*', '&', '^', '%', '$', '#', '@', '!', '¶', '\r'
 ]
-
 
 # scratch setup
 session = scratch.Session(SESSION_ID, username='SupKittyMeow')
@@ -27,7 +26,7 @@ def encode(data):
   newData = ''
   for letter in data:
     try:
-      newData = newData + str(chars.index(letter) + 1)
+      newData = newData + str(CHARS.index(letter) + 1)
     except:
       pass
   return newData
@@ -41,7 +40,7 @@ def decode(data):
       fullNumber = fullNumber.replace(" ", "")
 
       try:
-        newData = newData + chars[int(fullNumber.replace(".", "")) - 1]
+        newData = newData + CHARS[int(fullNumber.replace(".", "")) - 1]
       except:
         pass
 
@@ -53,8 +52,8 @@ def returnToScratch(content, player):
   print('Sent!')
 
 def generate(content, player):
-    response = model.generate_content(content)
-    print(response.text)
+    parameter = '##PARAMETERS## Ensure that any text you create or modify contains only the following characters: (a b c d e f g h i j k l m n o p q r s t u v w x y z 1 2 3 4 5 6 7 8 9 0 ~ - = . / ; \' [ ] \\ | } { " : ? > < _ + ) ( * & ^ % $ # @ ! ¶ `) Any character not listed above should not be used. Also, make sure your response is less than ' + str(255 - len(player)) + ' characters. ##CONTENT## '
+    response = model.generate_content(parameter + content, generation_config = genai.GenerationConfig( max_output_tokens = 255 - len(player) )) # this max length will not actually matter because tokens are not characters, but it gives a small limit that might help a little bit.
     returnToScratch(encode(response.text), player)
 
 previousQuestion = scratch.get_var('967781599', 'Question')
@@ -62,11 +61,8 @@ while True:
    currentQuestion = scratch.get_var('967781599', 'Question')
 
    if currentQuestion != previousQuestion:
-        try:
-          print('Received!')
-          previousQuestion = currentQuestion
-          splitQuestion = currentQuestion.split('.')
-          thread = threading.Thread(generate(decode(splitQuestion[1]), splitQuestion[0]))
-          thread.start()
-        except Exception as e:
-          print('Error: ' + str(e))
+      print('Received!')
+      previousQuestion = currentQuestion
+      splitQuestion = currentQuestion.split('.')
+      thread = threading.Thread(generate(decode(splitQuestion[1]), splitQuestion[0]))
+      thread.start()
