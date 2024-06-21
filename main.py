@@ -21,16 +21,18 @@ def decode(content):
 
 def returnToScratch(content, player):
   conn.set_var('Response', content + '.' + player)
+  print('Sent!')
 
 def generate(content, player):
     response = model.generate_content(content)
     returnToScratch(scratch.Encoding.encode(response), player)
 
-previousQuestion = conn.get_var('Question')
+previousQuestion = scratch.get_var('967781599', 'Question')
 while True:
-   currentQuestion = conn.get_var('Question')
+   currentQuestion = scratch.get_var('967781599', 'Question')
 
    if currentQuestion != previousQuestion:
+      print('Received!')
       decoded = decode(currentQuestion)
       thread = threading.Thread(generate(decoded[0], decoded[1]))
       thread.start()
