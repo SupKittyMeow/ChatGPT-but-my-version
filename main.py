@@ -25,7 +25,7 @@ def returnToScratch(content, player):
 
 def generate(content, player):
     response = model.generate_content(content)
-    returnToScratch(scratch.Encoding.encode(response), player)
+    returnToScratch(scratch.Encoding.encode(response.text), player)
 
 previousQuestion = scratch.get_var('967781599', 'Question')
 while True:
