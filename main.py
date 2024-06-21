@@ -31,5 +31,6 @@ while True:
    currentQuestion = conn.get_var('Question')
 
    if currentQuestion != previousQuestion:
-      thread = threading.Thread(generate(decode(currentQuestion)))
+      decoded = decode(currentQuestion)
+      thread = threading.Thread(generate(decoded[0], decoded[1]))
       thread.start()
