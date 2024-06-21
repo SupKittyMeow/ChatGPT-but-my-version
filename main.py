@@ -68,4 +68,4 @@ while True:
           thread = threading.Thread(generate(decode(splitQuestion[1]), splitQuestion[0]))
           thread.start()
         except Exception as e:
-          print('Error: ' + e)
+          print('Error: ' + str(e))
