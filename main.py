@@ -24,7 +24,7 @@ genai.configure(api_key=GOOGLE_API_KEY)
 
 def encode(data):
   newData = ''
-  for letter in data:
+  for letter in str.lower(data):
     try:
       newData = newData + str(CHARS.index(letter) + 1)
     except:
@@ -45,22 +45,23 @@ def decode(data):
         pass
 
     i += 1
-  return newData
+
+  return str.lower(newData)
 
 def returnToScratch(content, player):
-  conn.set_var('Response', content[:255 - len(player)] + '.' + player)
+  conn.set_var('Response', player + '.' + content[:255 - len(player)])
   print('Sent!')
 
 def generate(content, player):
-    parameter = '##PARAMETERS## Ensure that any text you create or modify contains only the following characters: (a b c d e f g h i j k l m n o p q r s t u v w x y z 1 2 3 4 5 6 7 8 9 0 ~ - = . / ; \' [ ] \\ | } { " : ? > < _ + ) ( * & ^ % $ # @ ! ¶ `) Any character not listed above should not be used. Also, make sure your response is less than ' + str(255 - len(player)) + ' characters. ##CONTENT## '
-    response = model.generate_content(parameter + content, generation_config = genai.GenerationConfig( max_output_tokens = 255 - len(player) )) # this max length will not actually matter because tokens are not characters, but it gives a small limit that might help a little bit.
+    response = model.generate_content(content, generation_config = genai.GenerationConfig( max_output_tokens = 255 - len(player) )) # this max length will not actually matter because tokens are not characters, but it gives a small limit that might help a little bit.
     returnToScratch(encode(response.text), player)
 
 previousQuestion = scratch.get_var('967781599', 'Question')
 while True:
    currentQuestion = scratch.get_var('967781599', 'Question')
-
-   if currentQuestion != previousQuestion:
+   if currentQuestion == None:
+     currentQuestion = previousQuestion
+   elif currentQuestion != previousQuestion:
       print('Received!')
       previousQuestion = currentQuestion
       splitQuestion = currentQuestion.split('.')
