@@ -14,7 +14,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.wfile.write(b'Hello world')
 
 
-httpd = socketserver.TCPServer(('', 8000), Handler)
+httpd = socketserver.TCPServer(('', 8080), Handler)
 httpd.serve_forever() # all of this so back4app doesnt keep saying it cant do stuff even though its working
 
 # constants
