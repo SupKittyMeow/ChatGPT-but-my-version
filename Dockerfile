@@ -30,8 +30,7 @@ EXPOSE 8080
 COPY requirements.txt .
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
-RUN --mount=type=cache,target=/root/.cache/pip \
-    python -m pip install -r requirements.txt
+RUN python -m pip install -r requirements.txt
 
 # Switch to the non-privileged user to run the application.
 USER appuser
