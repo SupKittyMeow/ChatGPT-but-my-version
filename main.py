@@ -2,6 +2,18 @@ import google.generativeai as genai
 import scratchattach as scratch
 import threading
 import os
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/', methods=['POST'])
+def handle_request():
+    data = request.json
+    # Process data as needed
+    return 'OK'
+
+if __name__ == '__main__':
+    app.run(port=8080)
 
 # constants
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
