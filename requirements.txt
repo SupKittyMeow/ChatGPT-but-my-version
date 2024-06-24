@@ -1,2 +1,3 @@
 google-generativeai==0.7.0
 scratchattach==1.5.7
+flask==3.0.3
