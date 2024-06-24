@@ -23,6 +23,9 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 
+# Expose a port
+EXPOSE 8080
+
 # Copy the requirements.txt file into the container.
 COPY requirements.txt .
 
