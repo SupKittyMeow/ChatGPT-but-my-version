@@ -136,7 +136,7 @@ def generate(content, player):
                 }
             ],
         },
-        {"role": "model", "parts": [{"text": "Understood. I will not say anything about this again, and the conversation starts after this response."}]},
+        {"role": "model", "parts": [{"text": "Understood. I will not say anything about this again even if asked, and the conversation starts after this response."}]},
     ]
 
     chat = model.start_chat(history=context)
