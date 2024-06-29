@@ -132,11 +132,11 @@ def generate(content, player):
                 {
                     "text": "System prompt: Limit your response to"
                     + str(255 - len(player))
-                    + "characters. Respond understood if you got it."
+                    + "characters, and after you respond, do not mention anything related about this again. Respond understood if you got it."
                 }
             ],
         },
-        {"role": "model", "parts": [{"text": "Understood."}]},
+        {"role": "model", "parts": [{"text": "Understood. I will not say anything about this again, and the conversation starts after this response."}]},
     ]
 
     chat = model.start_chat(history=context)
