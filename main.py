@@ -8,9 +8,13 @@ SESSION_ID = os.getenv("SESSION_ID")
 
 if GOOGLE_API_KEY == None:
     print("Google API Key is null!")
+else:
+    print(GOOGLE_API_KEY)
 
 if SESSION_ID == None:
     print("Session ID is null!")
+else:
+    print(SESSION_ID)
 
 CHARS = (
     [""] * 9
