@@ -151,9 +151,9 @@ def on_set(event):
         print("Question!")
         try:
             generate(decode(event.value), event.user)
-        except Exception as err:
-            print("Error :( heres the thing:\n" + err.__name__, flush=True)
-            returnToScratch(encode(err.__name__), encode(event.user))
+        except Exception as eror:
+            print("Error :( heres the thing:\n" + type(error).__name__, flush=True)
+            returnToScratch(encode(type(error).__name__), encode(event.user))
 
 
 events.start(thread=True)
