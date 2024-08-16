@@ -123,7 +123,7 @@ def decode(data):
 
 def returnToScratch(content, player):
     conn.set_var("Response", player + "." + content[: 255 - len(player)])
-    print("Sent")
+    print("Sent", flush=True)
 
 
 def generate(content, player):
@@ -146,13 +146,13 @@ def generate(content, player):
 
 @events.event
 def on_set(event):
-    print("Received!")
-    if (event.var == "Question"):
+    print("Received!", flush=True)
+    if (event.var == "Question", flush=True):
         print("Question!")
         try:
             generate(decode(event.value), event.user)
         except:
-            print("Error :(")
+            print("Error :(", flush=True)
 
 
 events.start(thread=True)
