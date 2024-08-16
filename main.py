@@ -4,7 +4,7 @@ import os
 
 # constants
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
-SESSION_ID = os.environ['SESSION_ID']
+PASSWORD = os.environ['PASSWORD']
 
 
 CHARS = (
@@ -83,7 +83,7 @@ CHARS = (
 )
 
 # scratch setup
-session = scratch.Session(SESSION_ID, username="SupKittyMeow")
+session = scratch.login("SupKittyMeow", PASSWORD)
 conn = session.connect_cloud("967781599")
 events = scratch.CloudEvents("967781599")
 
