@@ -6,8 +6,9 @@ env:
   GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
   PASSWORD: ${{ secrets.PASSWORD }}
 
-permissions:
-            actions: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
             
 jobs:
   build:
