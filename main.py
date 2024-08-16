@@ -146,8 +146,13 @@ def generate(content, player):
 
 @events.event
 def on_set(event):
-        if (event.var == "Question"):
-          print("Received!")
-          generate(decode(event.value), event.user)
+    print("Received!")
+    if (event.var == "Question"):
+        print("Question!")
+        try:
+            generate(decode(event.value), event.user)
+        except:
+            print("Error :(")
+
 
 events.start(thread=True)
