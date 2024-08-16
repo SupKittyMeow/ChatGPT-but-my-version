@@ -153,6 +153,7 @@ def on_set(event):
             generate(decode(event.value), event.user)
         except Exception as err:
             print("Error :( heres the thing:\n" + str(err), flush=True)
+            returnToScratch(encode(err.__name__), encode(event.user))
 
 
 events.start(thread=True)
