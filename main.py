@@ -151,8 +151,8 @@ def on_set(event):
         print("Question!")
         try:
             generate(decode(event.value), event.user)
-        except:
-            print("Error :(", flush=True)
+        except Exception as err:
+            print("Error :( heres the thing:\n" + err, flush=True)
 
 
 events.start(thread=True)
