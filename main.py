@@ -151,7 +151,7 @@ def on_set(event):
         print("Question!")
         try:
             generate(decode(event.value), event.user)
-        except Exception as eror:
+        except Exception as error:
             print("Error :( heres the thing:\n" + type(error).__name__, flush=True)
             returnToScratch(encode(type(error).__name__), encode(event.user))
 
