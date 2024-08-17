@@ -122,7 +122,7 @@ def decode(data):
 
 
 def returnToScratch(content, player):
-    conn.set_var("Response", player + "." + content[: 255 - len(player)])
+    conn.set_var("Response", 1 + player + "." + content[: 255 - len(player)])
     print("Sent", flush=True)
 
 
@@ -153,7 +153,7 @@ def on_set(event):
             generate(decode(event.value), event.user)
         except Exception as error:
             print("Error :( heres the thing:\n" + type(error).__name__, flush=True)
-            returnToScratch(encode(type(error).__name__), encode(event.user))
+            returnToScratch(0 + encode(type(error).__name__), encode(event.user))
 
 
 events.start(thread=True)
