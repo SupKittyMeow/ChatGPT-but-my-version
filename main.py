@@ -146,7 +146,7 @@ def generate(content, player):
 
 @events.event
 def on_set(event):
-    print("Received!", flush=True)
+    # print("Received!", flush=True)
     if (event.var == "Question"):
         print("Question!")
         try:
