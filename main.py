@@ -123,7 +123,7 @@ def decode(data):
 
 def returnToScratch(content, player):
     conn.set_var("Response", '1' + player + "." + content[: 253 - len(player)])
-    print("Sent", flush=True)
+    print("Sent!", flush=True)
 
 
 def generate(content, player):
