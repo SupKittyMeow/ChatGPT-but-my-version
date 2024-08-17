@@ -122,7 +122,7 @@ def decode(data):
 
 
 def returnToScratch(content, player):
-    conn.set_var("Response", '0' + player + "." + content[: 253 - len(player)])
+    conn.set_var("Response", '1' + player + "." + content[: 253 - len(player)])
     print("Sent!", flush=True)
 
 
