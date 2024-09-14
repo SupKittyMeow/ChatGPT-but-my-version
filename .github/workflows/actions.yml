@@ -47,7 +47,12 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Cache hit/miss info
-        run: echo "Cache hit: ${{ steps.cache-step.outputs.cache-hit }}"
+        run: |
+          if ${{ steps.cache-step.outputs.cache-hit == 'true' }}; then
+            echo "Cache hit"
+          else
+            echo "Cache miss"
+          fi
 
       - name: Install dependencies
         if: steps.cache-step.outputs.cache-hit != 'true'
