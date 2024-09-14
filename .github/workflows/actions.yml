@@ -2,7 +2,6 @@ name: Python Script Execution
 
 on:
   push:
-  workflow_dispatch:
   schedule:
     - cron: '0 */6 * * *' # Every 6 hours
 
@@ -27,21 +26,37 @@ jobs:
           python-version: '3.12'
 
       - name: Get pip cache dir
-        id: pip-cache
-        run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+        id: pip-cache-dir
+        run: |
+          echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+          echo "Pip cache directory: $(pip cache dir)"
+
+      - name: Generate requirements hash
+        id: req-hash
+        run: |
+          echo "hash=$(md5sum requirements.txt | awk '{print $1}')" >> $GITHUB_OUTPUT
+          echo "Requirements hash: $(md5sum requirements.txt | awk '{print $1}')"
 
       - name: Cache dependencies
         uses: actions/cache@v3
+        id: cache-step
         with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          path: ${{ steps.pip-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-pip-${{ steps.req-hash.outputs.hash }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
+      - name: Cache hit/miss info
+        run: echo "Cache hit: ${{ steps.cache-step.outputs.cache-hit }}"
+
       - name: Install dependencies
+        if: steps.cache-step.outputs.cache-hit != 'true'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: List installed packages
+        run: pip list
 
       - name: Execute Python script
         run: python main.py
