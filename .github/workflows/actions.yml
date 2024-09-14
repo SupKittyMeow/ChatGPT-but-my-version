@@ -4,7 +4,7 @@ on:
     - cron: '0 */6 * * *' # Every 6 hours (exactly at limit)
 env:
   GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-  PASSWORD: ${{ secrets.PASSWORD }}
+  SCRATCH_SESSION_ID: ${{ secrets.SCRATCH_SESSION_ID }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
