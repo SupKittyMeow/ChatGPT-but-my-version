@@ -4,7 +4,7 @@ import os
 
 # constants
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
-SESSION_ID = os.environ['SCRATCH_SESSION_ID']
+SESSION_ID = os.environ['SCRATCH_SESSION_ID'] # if this doesn't work, switch back to password.
 
 
 CHARS = (
