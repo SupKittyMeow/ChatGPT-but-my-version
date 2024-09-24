@@ -78,8 +78,8 @@ def on_set(event):
         except Exception as error:
             print('Error :( heres the thing:\n' + type(error).__name__, flush=True)
             returnToScratch('0' + encode(type(error).__name__), encode(event.user))
-    if (event.var == 'Ping' and event.value == '0'):
-        conn.set_var('Ping', '1')
+    if (event.var == 'Ping'):
+        conn.set_var('Pong', event.value)
 
 
 events.start(thread=True)
