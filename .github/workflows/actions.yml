@@ -1,7 +1,6 @@
 name: Python Script Execution
 
 on:
-  workflow_dispatch:
   push:
   schedule:
     - cron: '0 */6 * * *' # Every 6 hours
@@ -18,54 +17,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      # Caching pip dependencies
-      - name: Cache pip dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      # Install Python packages
-      - name: Install Python packages
-        run: pip install -r requirements.txt
-
-      # Execute Python script
-      - name: Execute Python script
-        run: python main.py
-
-  save-cache:
-    runs-on: ubuntu-latest
-    needs: build
-    if: always()  # Ensures this job runs regardless of the previous job's status
-    steps:
-      - name: Check if pip cache exists
-        run: |
-          if [ -d ~/.cache/pip ]; then
-            echo "Pip cache exists."
-          else
-            echo "Pip cache does not exist."
-          fi
-
-      - name: Cache pip dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          
-      - name: List cache directory contents
-        run: |
-          if [ -d ~/.cache/pip ]; then
-            ls -al ~/.cache/pip
-          else
-            echo "No cache directory to list."
-          fi
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pipenv'
+    - name: Install pipenv
+      run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
+    - run: pipenv install
+    - run: pip install -r requirements.txt
+    - name: Execute Python script
+      run: python main.py
