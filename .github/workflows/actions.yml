@@ -26,6 +26,10 @@ jobs:
         with:
           python-version: '3.12'
       
+      # Debug: Check pip cache directory
+      - name: Check pip cache directory
+        run: pip cache dir
+
       # Caching pip dependencies
       - name: Cache pip dependencies
         uses: actions/cache@v3
@@ -35,8 +39,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
+      # Debug: Show hash for requirements.txt
+      - name: Show hash for requirements.txt
+        run: echo ${{ hashFiles('requirements.txt') }}
+      
+      # Install Python packages
       - name: Install Python packages
         run: pip install -r requirements.txt
+
+      # Debug: List cache directory contents
+      - name: List cache directory contents
+        run: ls -al ~/.cache/pip
 
       - name: Execute Python script
         run: python main.py
