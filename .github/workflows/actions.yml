@@ -1,6 +1,7 @@
 name: Python Script Execution
 
 on:
+  workflow_dispatch:
   push:
   schedule:
     - cron: '0 */6 * * *' # Every 6 hours
@@ -25,9 +26,7 @@ jobs:
         with:
           python-version: '3.12'
           cache: 'pip' # caching pip dependencies
-
-      - name: Install Python packages
-        run: pip install -r requirements.txt
+      - run: pip install -r requirements.txt
       
       - name: Execute Python script
         run: python main.py
