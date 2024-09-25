@@ -25,8 +25,18 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip' # caching pip dependencies
-      - run: pip install -r requirements.txt
       
+      # Caching pip dependencies
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install Python packages
+        run: pip install -r requirements.txt
+
       - name: Execute Python script
         run: python main.py
