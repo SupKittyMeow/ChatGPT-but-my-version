@@ -35,22 +35,22 @@ def generate(content, player):
         generation_config=genai.GenerationConfig(),
     )  # this max length will not actually matter because tokens are not characters, but it gives a small limit that might help a little bit.
 
-    print("Sent!")
+    print("Sent!", flush=True)
     return response.text
 
 @client.event
 def on_ready():
-    print("Requests are ready!")
+    print("Requests are ready!", flush=True)
 
 @client.request
 def ping():
-    print("Ponging Ping!")
+    print("Ponging Ping!", flush=True)
     return "pong"
 
 @client.request
 def question(argument1, argument2):
     try:
-        print("Question!")
+        print("Question!", flush=True)
         return generate(argument1, argument2)
     except Exception as error:
         print('Error :( heres the thing:\n' + type(error).__name__, flush=True)
