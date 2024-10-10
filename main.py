@@ -53,7 +53,8 @@ def question(argument1, argument2, argument3, argument4):
         print("Question!", flush=True)
         return generate(argument1, argument2, argument3, argument4)
     except Exception as error:
-        print('Error :( heres the thing:\n' + type(error).__name__, flush=True)
-        return 'Error:' + type(error).__name__
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        print('Error :( heres the thing:\n' + exc_type + " line " + exc_tb.tb_lineno, flush=True)
+        return 'Error:' + exc_type.__name__
 
 client.run()
