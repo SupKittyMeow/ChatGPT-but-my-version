@@ -30,10 +30,9 @@ def generate(content, player, temp, prompt):
     ]
 
     chat = model.start_chat(history=context)
-
     response = chat.send_message(
         content,
-        generation_config=genai.GenerationConfig(temperature=temp),
+        generation_config=genai.GenerationConfig(temperature=int(temp)),
     )  # this max length will not actually matter because tokens are not characters, but it gives a small limit that might help a little bit.
 
     print("Sent!", flush=True)
