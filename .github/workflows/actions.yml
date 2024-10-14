@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
   schedule:
-    - cron: '0 */6 * * *' # Every 6 hours
+    - cron: '55 */5 * * *' # Every 5 hours 55 mins
 
 env:
   GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
