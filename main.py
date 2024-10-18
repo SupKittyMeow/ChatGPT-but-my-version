@@ -1,6 +1,5 @@
 import google.generativeai as genai
 import scratchattach as scratch
-import sys
 import os
 
 # constants
