@@ -30,17 +30,17 @@ def create_context(content, userPrompt):
         {'role': 'model', 'parts': [{'text': 'You didn\'t ask anything!'} ] }
     ]
 
-    for prompt in promptList:
-        newContext = {}
-        if len(prompt) > 1:
-            if prompt[0] == "0":
-                newContext = {'role': 'user', 'parts': [ { 'text': prompt[1:] } ] }
-            elif prompt[0] == "1":
-                newContext = {'role': 'model', 'parts': [ { 'text': prompt[1:] } ] }
-            
-            context.append(newContext)
-        else:
-            break
+for prompt in promptList:
+    newContext = {}
+    if len(prompt) > 1:
+        if prompt[0] == "0":
+            newContext = {'role': 'user', 'parts': [ { 'text': prompt[1:] } ] }
+        elif prompt[0] == "1":
+            newContext = {'role': 'model', 'parts': [ { 'text': prompt[1:] } ] }
+        
+        context.append(newContext)
+    else:
+        break
 
 def generate(content, player, temp, prompt):
     context = create_context(content, prompt)
