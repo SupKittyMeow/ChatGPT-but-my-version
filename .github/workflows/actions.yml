@@ -3,6 +3,8 @@ name: Python Script Execution
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
   schedule:
     - cron: '55 */5 * * *' # Every 5 hours 55 mins
 
