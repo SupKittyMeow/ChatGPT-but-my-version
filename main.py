@@ -47,8 +47,8 @@ def ping():
     print("Ponging Ping!", flush=True)
     return "pong"
     
-@client.on_error
-def error():
+@client.request
+def on_error():
     return 'Error: ' + type(error).__name__
     
 @client.request
