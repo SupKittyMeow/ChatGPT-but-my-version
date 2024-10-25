@@ -46,6 +46,7 @@ def on_ready():
 def ping():
     print("Ponging Ping!", flush=True)
     return "pong"
+    
 @client.on_error
 def error():
     return 'Error: ' + type(error).__name__
