@@ -46,14 +46,13 @@ def on_ready():
 def ping():
     print("Ponging Ping!", flush=True)
     return "pong"
-
+@client.on_error
+def error():
+    return 'Error: ' + type(error).__name__
+    
 @client.request
 def question(argument1, argument2, argument3, argument4):
-    try:
         print("Question!", flush=True)
         return generate(argument1, argument2, argument3, argument4)
-    except Exception as error:
-        print("Error :( heres the thing:\n" + type(error).__name__, flush=True)
-        return 'Error: ' + type(error).__name__
 
 client.run()
