@@ -123,13 +123,14 @@ def create_chat(player, prompt):
             "role": "user",
             "parts": [{"text": "Hi. My name is " + player + ". What did I just ask?"}],
         },
-        {"role": "model", "parts": [{"text": "You didn't ask anything!"}]},
+        {"role": "model", "parts": [{"text": "You didn't ask anything!"}]}
     ]
 
+    print("player: " + chat_cache.get(player) + " end player")
     context.append(chat_cache.get(player))
     chat_cache.update({player: context})
 
-    print(chat_cache.get(player), flush=True)
+    print("cache: " + chat_cache.get(player), flush=True + " end cache")
     return model.start_chat(history=context)
 
 
