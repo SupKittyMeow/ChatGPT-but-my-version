@@ -144,9 +144,8 @@ def generate(content, player, temp, prompt):
         generation_config=genai.GenerationConfig(temperature=float(temp)),
     )  # this max length will not actually matter because tokens are not characters, but it gives a small limit that might help a little bit.
 
-    print(response.text, flush=True)
-    os.abort()
-    chat_cache.update({player: chat_cache.get(player) + response.text})
+    updated_response = {"role": "model", "parts": [{"text": response.text}]}
+    chat_cache.update({player: chat_cache.get(player) + updated_response})
     
     print("Sent!", flush=True)
     return response.text
