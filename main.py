@@ -129,7 +129,7 @@ def create_chat(player, prompt):
     player_cache = chat_cache.get(player)
     
     if(player_cache is not None):
-        print("player: " + player_cache + " end player")
+        print("player: " + str(player_cache) + " end player")
         context.append(player_cache)
     
     chat_cache.update({player: context})
