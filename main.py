@@ -49,7 +49,7 @@ def ping():
     
 @client.request
 def on_error():
-    return 'Error: ' + type(error).__name__
+    return 'Error :('
     
 @client.request
 def question(argument1, argument2, argument3, argument4):
