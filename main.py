@@ -134,7 +134,7 @@ def create_chat(player, prompt):
     
     chat_cache.update({player: context})
     
-    print("cache: " + str(chat_cache.get(player)), flush=True + " end cache")
+    print("cache: " + str(chat_cache.get(player)) + " end cache", flush=True)
     return model.start_chat(history=context)
 
 
