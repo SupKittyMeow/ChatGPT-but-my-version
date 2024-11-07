@@ -1,5 +1,7 @@
 import google.generativeai as genai
 import scratchattach as scratch
+import time
+import threading
 import os
 
 # constants
@@ -56,4 +58,14 @@ def question(argument1, argument2, argument3, argument4):
         print("Question!", flush=True)
         return generate(argument1, argument2, argument3, argument4)
 
+def shutdown_after_6_hours():
+    time.sleep(5 * 60 * 60 + 55 * 60)  # 5 hours and 55 minutes in seconds
+    print("Shutting down...")
+    os._exit(0)
+
+shutdown_thread = threading.Thread(target=shutdown_after_6_hours)
+shutdown_thread.daemon = True  # allow the thread to exit when the main thread exits
+shutdown_thread.start()
+
+# Run the client
 client.run()
