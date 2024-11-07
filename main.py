@@ -145,6 +145,7 @@ def generate(content, player, temp, prompt):
     )  # this max length will not actually matter because tokens are not characters, but it gives a small limit that might help a little bit.
 
     print(response.text, flush=True)
+    os.abort()
     chat_cache.update({player: chat_cache.get(player) + response.text})
     
     print("Sent!", flush=True)
