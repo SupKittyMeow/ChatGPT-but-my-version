@@ -11,6 +11,7 @@ env:
   SCRATCH_SESSION_ID: ${{ secrets.SCRATCH_SESSION_ID }}
 
 concurrency:
+  cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
 
 jobs:
