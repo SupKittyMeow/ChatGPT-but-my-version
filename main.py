@@ -97,7 +97,6 @@ genai.configure(api_key=GOOGLE_API_KEY)
 
 
 def create_chat(player, prompt):
-
     context = [
         {
             "role": "user",
@@ -129,12 +128,12 @@ def create_chat(player, prompt):
     player_cache = chat_cache.get(player)
     
     if(player_cache is not None):
-        print("player: " + str(player_cache) + " end player", flush=True)
+        print("player: " + str(player_cache) + " end player", flush=True, end="")
         context.append(player_cache)
     
     chat_cache.update({player: context})
     
-    print("cache: " + str(chat_cache.get(player)) + " end cache", flush=True)
+    print("cache: " + str(chat_cache.get(player)) + " end cache", flush=True, end="")
     return model.start_chat(history=context)
 
 
@@ -147,7 +146,7 @@ def generate(content, player, temp, prompt):
         generation_config=genai.GenerationConfig(temperature=float(temp)),
     )  # this max length will not actually matter because tokens are not characters, but it gives a small limit that might help a little bit.
 
-    print(chat_cache.get(player), flush=True)
+    print(chat_cache.get(player), flush=True, end="")
     chat_cache.update({player: chat_cache.get(player) + response.text})
     
     print("Sent!", flush=True)
