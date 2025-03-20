@@ -14,7 +14,7 @@ CHARS = [''] * 9 + [' '] + ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k
 # scratch setup
 session = scratch.login_by_id(SESSION_ID, username="SupKittyMeow")
 conn = session.connect_cloud('967781599')
-client = scratch.CloudRequests(conn)
+client = conn.CloudRequests(conn)
 
 # gemini setup
 model = genai.GenerativeModel(model_name='gemini-2.0-flash-lite')
