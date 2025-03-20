@@ -68,4 +68,4 @@ shutdown_thread.daemon = True  # allow the thread to exit when the main thread e
 shutdown_thread.start()
 
 # Run the client
-client.run()
+client.start()
